@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base :: parent(~{:: #content}, ~{:: title})}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Contact</title>
+</head>
+
+<body>
+
+
+    <div id="content">
+        <div th:if="${loggedInUser}">
+            <div th:replace="~{user/user_sidebar :: sidebar}"></div>
+        </div>
+        <div class="sm:pl-64 pt-20"> <!-- style="height: 1000px;" -->
+            <div class="grid grid-cols-12">
+                <div class="col-span-3"></div>
+                <div class="col-span-12 md:col-span-6">
+                    <div
+                        class="card block p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                        <h1 class="text-center text-2xl font-semibold">Add New Contact</h1>
+                        <form th:action="@{'/user/contacts/add'}" th:object="${contactForm}" method="post" enctype="multipart/form-data" class="mt-5">
+
+                            <!-- name -->
+                            <div class="mb-2">
+                                <label for="name"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact
+                                    Name
+                                </label>
+                                <div class="relative mb-6">
+                                    <div
+                                        class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                        <i class="fa-solid fa-user h-4 w-4"></i>
+                                    </div>
+                                    <input type="text" id="name" th:field="*{name}"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="name of contact">
+                                </div>
+                            </div>
+
+                            <!-- email -->
+                            <div class="mb-2">
+                                <label for="email"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact
+                                    Email
+                                </label>
+                                <div class="relative mb-6">
+                                    <div
+                                        class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                        <i class="fa-solid fa-envelope h-4 w-4"></i>
+                                    </div>
+                                    <input type="email" id="email" th:field="*{email}"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="contact@gmail.com">
+                                </div>
+                            </div>
+
+                            <!-- phone -->
+                            <div class="mb-2">
+                                <label for="phone"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact
+                                    Phone No.
+                                </label>
+                                <div class="relative mb-6">
+                                    <div
+                                        class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                        <i class="fa-solid fa-phone-volume h-4 w-4"></i>
+                                    </div>
+                                    <input type="text" id="phone" th:field="*{phoneNumber}"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="8859092189">
+                                </div>
+                            </div>
+
+                            <!-- address -->
+                            <div class="mb-2">
+                                <label for="address"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact
+                                    Address
+                                </label>
+                                <div class="relative mb-6">
+                                    <div
+                                        class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                        <i class="w-4 h-4 fa-solid fa-location-dot"></i>
+                                    </div>
+                                    <input type="text" id="address" th:field="*{address}"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="address of contact">
+                                </div>
+                            </div>
+
+                            <!-- pic -->
+                            <div class="mb-2">
+
+                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                    for="image_input">Contact Pic</label>
+                                <input type="file" id="image_input" th:field="*{contactPic}"
+                                    class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+                            </div>
+
+                            <!-- description -->
+                            <div class="mb-2">
+                                <label for="description"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact
+                                    Description
+                                </label>
+                                <textarea id="description" rows="2" th:field="*{description}"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="write something about your contact..."></textarea>
+                            </div>
+
+                            <!-- favourite field-->
+                            <div class="mb-2">
+                                <input id="favorite" type="checkbox" th:field="*{favorite}" value=""
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="favorite"
+                                    class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">favorite</label>
+                            </div>
+
+                            <!-- button field -->
+                            <div class="button-container flex gap-4 justify-center mt-4">
+                                <button type="submit" class="px-3 py-2 rounded bg-blue-700 text-white">Add
+                                    Contact</button>
+                                <button type="reset" class="px-3 py-2 rounded bg-red-600 text-white">Reset</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>

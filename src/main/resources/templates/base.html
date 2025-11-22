@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="parent(content, title)">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:replace="${title}">Base Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" th:href="@{'/css/output.css'}" />
+    <link rel="stylesheet" th:href="@{'/css/common..css'}" />
+</head>
+
+<body class="bg-gray-200 dark:bg-gray-900 dark:text-white">
+
+
+    <header th:if="${loggedInUser}">
+        <div th:replace="~{user/user_navbar :: navbar}"></div>
+    </header>
+        
+    </div>
+
+    <header th:unless="${loggedInUser}">
+        <div th:replace="~{navbar :: navbar}"></div>
+    </header>
+
+    <section class="p-4">
+        <div th:replace="${content}"></div>
+    </section>
+
+
+    <!-- <footer class="p-4">
+        <h2>This common footer</h2>
+    </footer> -->
+
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+    <script th:src="@{/js/script.js}"></script>
+</body>
+
+</html>
